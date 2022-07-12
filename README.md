@@ -4,7 +4,7 @@ I built a thing to fetch your favorite stock data.
 
 Notes:
 
-1. Uses free account which only allows 5 requests per minute. Which means if you load too many tickers, it will def start to break.
+1. Rename .env.sample file to .env and add polygon key. If using a free account, only 5 requests per minute are allowed.. Which means if you load too many tickers, it will def start to break.
 2. The free account does not show open/close data for the current day so I'm pulling the previous day.
 3. Not all data shows up for all Tickers...
 
