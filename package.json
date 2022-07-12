@@ -4,7 +4,9 @@
   "scripts": {
     "client": "cd client && yarn start",
     "server": "./node_modules/nodemon/bin/nodemon.js server/index.js",
+    "server:dev": "./node_modules/nodemon/bin/nodemon.js --inspect server/index.js",
     "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "dev": "concurrently --kill-others-on-fail \"yarn server:dev\" \"yarn client\"",
     "postinstall": "cd client && yarn install",
     "test": "cd client && yarn test"
   },
@@ -12,7 +14,9 @@
     "apollo-datasource-rest": "^3.6.1",
     "apollo-server": "^3.9.0",
     "apollo-server-express": "^3.9.0",
+    "bignumber.js": "^9.0.2",
     "body-parser": "^1.19.0",
+    "casual": "^1.6.2",
     "cors": "^2.8.5",
     "date-fns": "^2.28.0",
     "dotenv": "^16.0.1",

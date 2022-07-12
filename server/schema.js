@@ -1,7 +1,9 @@
 const { gql } = require('apollo-server');
-
+const { BigNumber } = require('./types/BigNumber');
 
 const typeDefs = gql`
+  scalar BigNumber
+
   type Ticker {
     ticker: String
     name: String
@@ -14,10 +16,18 @@ const typeDefs = gql`
     cik: String
     composite_figi: String
     share_class_figi: String
-    market_cap: Int
+    share_class_shares_outstanding: BigNumber
+    market_cap: String
     total_employees: Int
     phone_number: String
     address: TickerAddress
+  }
+
+  type TickerFinancials {
+    revenue: BigNumber
+    operating_expenses: BigNumber
+    gross_profit: BigNumber
+    basic_eps: Float
   }
 
   type TickerAddress {
@@ -77,6 +87,7 @@ const typeDefs = gql`
     GetTicker(ticker: String): Ticker
     GetNews(NewsRequest: NewsRequest) : [TickerNews]
     GetDailyOpenClose(ticker: String) : DailyOpenClose
+    GetFinancials(ticker: String) : TickerFinancials
   }
 `;
 
@@ -88,12 +99,15 @@ const resolvers = {
     GetTicker(_source, args, { dataSources })  {
       return dataSources.polygonApi.getTicker(args);
     },
-    GetNews(_source, args, { dataSources })  {
-      return dataSources.polygonApi.getNews(args);
+    GetNews(_source, { NewsRequest }, { dataSources })  {
+      return dataSources.polygonApi.getNews(NewsRequest);
     },
     GetDailyOpenClose(_source, args, { dataSources })  {
       return dataSources.polygonApi.getDaily(args);
     },
+    GetFinancials(_source, args, { dataSources })  {
+      return dataSources.polygonApi.getFinancials(args);
+    }
   }
 };
 

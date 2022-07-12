@@ -1,5 +1,5 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
-const { format } = require('date-fns');
+const { format, subDays } = require('date-fns');
 require('dotenv').config();
 
 class PologonApi extends RESTDataSource {
@@ -23,9 +23,23 @@ class PologonApi extends RESTDataSource {
   }
 
   async getDaily({ticker}) {
-
-    const { results } = await this.get(`/v1/open-close/${ticker}/${format(new Date(), "yyyy-MM-dd")}`);
+    const results = await this.get(`/v1/open-close/${ticker}/${format(subDays(new Date(), 1), "yyyy-MM-dd")}`);
     return results;
+  }
+
+  async getFinancials(args) {
+    const data = await this.get(`/vX/reference/financials`, args);
+    const income_statement = await data.results[0]?.financials?.income_statement;
+    const financials = {
+      revenue: income_statement?.revenues?.value,
+      operating_expenses: income_statement?.operating_expenses.value,
+      gross_profit: income_statement?.gross_profit.value,
+      basic_eps: income_statement?.basic_earnings_per_share.value
+    };
+
+
+    console.log('financials', financials);
+    return financials;
   }
 
   async getNews(args) {

@@ -1,6 +1,10 @@
 import React from "react";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { ThemeProvider } from '@mui/material/styles';
 import Container from "@mui/material/Container";
+import Box from '@mui/material/Box';
+import blueGrey from '@mui/material/colors/blueGrey';
+import theme from './theme';
 import StocksContainer from "./components/StocksContainer";
 
 const client = new ApolloClient({
@@ -11,9 +15,13 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Container maxWidth="lg">
-        <StocksContainer />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container maxWidth="lg" sx={{backgroundColor: blueGrey[100]}}>
+          <Box sx={{ my: 4 }}>
+            <StocksContainer />
+          </Box>
+        </Container>
+      </ThemeProvider>
     </ApolloProvider>
   );
 }

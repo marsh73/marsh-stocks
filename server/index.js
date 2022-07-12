@@ -3,10 +3,9 @@ const { ApolloServer } = require('apollo-server-express');
 const { typeDefs, resolvers } = require('./schema');
 const { PologonApi } = require('./polygonApi');
 const express = require('express');
+const { mocks } = require('./mocks');
 const PORT = process.env.PORT || 4000;
-
-
-
+const MOCKS = process.env.MOCKS ? mocks : false;
 async function startApolloServer() {
   const app = express();
   const server = new ApolloServer({
@@ -15,6 +14,7 @@ async function startApolloServer() {
         polygonApi: new PologonApi()
       };
     },
+    mocks: MOCKS,
     typeDefs,
     resolvers
   });
@@ -30,3 +30,4 @@ async function startApolloServer() {
 };
 
 startApolloServer();
+
