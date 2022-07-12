@@ -13,7 +13,6 @@ import green from "@mui/material/colors/green";
 import NumberFormat from "react-number-format";
 
 function TickerDataValue({meta}) {
-  console.log('meta', meta)
   let pre = '';
   let val = meta.value;
 

@@ -5,7 +5,6 @@ const styles = {
 
 export const tickerDataMap = (data) => {
   const mapped = {};
-  console.log(data)
 
   if (data.GetDailyOpenClose) {
     mapped.daily = {
@@ -26,7 +25,6 @@ export const tickerDataMap = (data) => {
   }
 
   if (data.GetFinancials) {
-    console.log('getFinancials', data.GetFinancials)
     mapped.financial = {
       revenue: {label: "Revenue", value: data.GetFinancials?.revenue, style: styles.currency},
       operating_expenses: {label: "Opex", value: data.GetFinancials?.operating_expenses, style: styles.currency},

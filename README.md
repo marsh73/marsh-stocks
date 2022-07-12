@@ -1,28 +1,24 @@
 ## HELLO
 
-I built an app to display a list of orders... enjoy. I used Create React App to quickly get the bones up, using [https://www.freecodecamp.org/news/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0/](https://www.freecodecamp.org/news/how-to-make-create-react-app-work-with-a-node-backend-api-7c5c48acb1b0/) as a super simple setup.
+I built a thing to fetch your favorite stock data.
+
+Notes:
+
+1. Uses free account which only allows 5 requests per minute. Which means if you load too many tickers, it will def start to break.
+2. The free account does not show open/close data for the current day so I'm pulling the previous day.
+3. Not all data shows up for all Tickers...
 
 ## Setup
 
 ### `yarn install`
-### `yarn start`
+### `yarn start` - will run both server and client with live data
+### `MOCKS=true yarn start` - will run the app with mocks if live data is failing.
 
 This should be from the root dir. Will load both server and client dependencies. It should open [http://localhost:3000](http://localhost:3000) in your browser.
 
 This server should be running on http://localhost:4000.
 
-## Tests
-
-### `yarn test`
-
-Only unit tests for util functionality.
-
 ## App Details
 
-I took this opportunity to use Apollo Subscriptions for the web sockets on the server. I had not used them and wanted to see how friendly they were on the client.
+Simple React app with an Apollo Graphql Proxy layer to access the https://polygon.io/ API
 
-For this App I relied only on useState hooks for any state management. Would probably move this to useContext or add Redux if the app grew beyond what is there now.
-
-## Future ideas
-
-Next thing I would have done if I had more time would be to add better empty states and error messages. 

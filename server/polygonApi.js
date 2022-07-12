@@ -37,8 +37,6 @@ class PologonApi extends RESTDataSource {
       basic_eps: income_statement?.basic_earnings_per_share.value
     };
 
-
-    console.log('financials', financials);
     return financials;
   }
 
