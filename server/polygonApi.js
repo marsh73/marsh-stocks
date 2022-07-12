@@ -5,7 +5,7 @@ require('dotenv').config();
 class PologonApi extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = process.env.POLYGON_API;
+    this.baseURL = 'https://api.polygon.io'
   }
 
   willSendRequest(request) {
